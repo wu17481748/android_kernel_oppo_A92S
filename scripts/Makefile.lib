@@ -309,10 +309,10 @@ cmd_dt_S_dtb=						\
 $(obj)/%.dtb.S: $(obj)/%.dtb
 	$(call cmd,dt_S_dtb)
 
-ARCH := $(shell uname -m)
+ARCHZ := $(shell uname -m)
 
-$( dtc_overlay architecture: $(ARCH))
-ifeq ($(ARCH), arm64)
+$( dtc_overlay architecture: $(ARCHZ))
+ifeq ($(ARCHZ), aarch64)
 cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
 	$(CPP) $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $< ; \
 	$(srctree)/vendor/A64/bin/qemu-x86_64-static $(srctree)/scripts/dtc/dtc_overlay -@ -O dtb -o $@ -b 0 \
