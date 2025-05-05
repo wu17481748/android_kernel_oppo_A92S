@@ -1,11 +1,6 @@
 name: 编译OPPO A92S mt6873机型内核
 
 on:
-  # Triggers the workflow on push or pull request events but only for the "安卓10" branch
-  push:
-    branches: [ "安卓10" ]
-  pull_request:
-    branches: [ "安卓10" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -77,13 +72,9 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$GITHUB_WORKSPACE/kernel_workspace/gcc64/bin:$GITHUB_WORKSPACE/kernel_workspace/gcc32/bin:$PATH
-        #export KBUILD_BUILD_HOST=企鹅交流:722651738
-        #export KBUILD_BUILD_USER=kuan-jsbsbxjxh66
-        sed -i '444d' Makefile
-        sed -i '65,70d' scripts/drvgen/drvgen.mk
-        sed -i '69d' scripts/drvgen/drvgen.mk
-        sed -i '315,322d' scripts/Makefile.lib
-        sed -i '321d' scripts/Makefile.lib
+        export KBUILD_BUILD_HOST=企鹅交流:722651738
+        export KBUILD_BUILD_USER=kuan-jsbsbxjxh66
+        
         sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 100
         sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 100
         make -s -j$(nproc --all) O=out ARCH=arm64 oppo6873_defconfig
