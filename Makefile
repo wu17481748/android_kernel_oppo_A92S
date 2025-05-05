@@ -440,8 +440,13 @@ CFLAGS_MODULE +=   -DVENDOR_EDIT
 #endif /* VENDOR_EDIT */
 
 -include OplusDeviceConfig.mk
+
+ARCHZ := $(shell uname -m)
+
+ifeq ($(ARCHZ), aarch64)
 # shared object
 export LD_LIBRARY_PATH=$(srctree)/vendor/A64:$LD_LIBRARY_PATH
+endif
 
 #ifdef  VENDOR_EDIT
 #Anhui.Sun@PSW.NW.RF, 2019/10/12, add for mtk version
