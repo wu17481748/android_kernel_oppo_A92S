@@ -60,9 +60,9 @@ $(DRVGEN_FILE_LIST): $(DRVGEN_TOOL) $(DRVGEN_FIG) $(PROJ_DTS_FILES)
 			exit 1;\
 		fi \
 	done
-ARCH := $(shell uname -m)
+ARCHZ := $(shell uname -m)
 
-ifeq ($(ARCH), arm64)
+ifeq ($(ARCHZ), aarch64)
 dtbo_check: $(MAIN_DTB_NAMES) $(PROJ_DTB_NAMES)
 	for i in $(PROJ_DTB_FILES); do \
 		$(srctree)/vendor/A64/bin/qemu-x86_64-static $(srctree)/scripts/dtc/ufdt_apply_overlay $(MAIN_DTB_FILES) $$i $$i.merge;\
